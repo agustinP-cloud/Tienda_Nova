@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Políticas de seguridad – TiendaNova</title>
+<link rel="stylesheet" href="politicas.css">
+</head>
+<body>
+<header><div class="wrap top">
+<div class="logo">🛒 TiendaNova</div>
+<nav aria-label="Políticas">
+<a href="#conexion">Conexión</a>
+<a href="#pago">Pago</a>
+<a href="#cuenta">Cuenta</a>
+<a href="#seguimiento">Seguimiento</a>
+</nav>
+<span class="secure" id="badge">🔒 Sitio seguro</span>
+</div></header>
+
+<main class="wrap">
+
+<section class="hero">
+<h1>Así cuidamos tus datos</h1>
+<p>Cuatro políticas de seguridad que protegen tu conexión, tus pagos, tu cuenta y tus pedidos en TiendaNova.</p>
+<a class="btn" href="#conexion">Ver las políticas</a>
+</section>
+
+<h2>Las cuatro políticas</h2>
+<div class="trust">
+<a href="#conexion"><b>🔒 Conexión cifrada</b><span>Todo el sitio funciona con HTTPS.</span></a>
+<a href="#pago"><b>💳 Pago protegido</b><span>Los datos de tarjeta los procesa la pasarela, no los guardamos.</span></a>
+<a href="#cuenta"><b>🔑 Cuenta segura</b><span>Contraseñas cifradas y verificación en dos pasos.</span></a>
+<a href="#seguimiento"><b>📦 Seguimiento</b><span>Podés ver el estado de tu pedido en todo momento.</span></a>
+</div>
+
+<!-- 1. CONEXIÓN CIFRADA -->
+<h2 id="conexion">Conexión cifrada</h2>
+<p class="lead">Cuando entrás a TiendaNova, lo que enviás y recibís viaja por un canal cifrado. Si alguien intercepta la comunicación, solo ve datos ilegibles.</p>
+
+<ol class="flow">
+<li><b>Tu navegador pide la página</b>Escribís la dirección o hacés clic en un enlace.</li>
+<li><b>Se verifica el sitio</b>El servidor presenta un certificado que confirma que es el sitio real.</li>
+<li><b>Se abre un canal cifrado</b>Navegador y servidor acuerdan claves con TLS, el protocolo detrás de HTTPS.</li>
+<li><b>Los datos viajan cifrados</b>Contraseñas, direcciones y compras no se pueden leer en el camino.</li>
+</ol>
+
+<div class="cols" style="margin-top:22px">
+<div class="box">
+<h3>¿Por qué este sitio usa HTTPS?</h3>
+<p>Esta página está publicada desde un repositorio de Git en GitHub Pages. Ese servicio entrega la página por HTTPS y gestiona el certificado de forma automática, así que no hay que instalar ni renovar nada a mano.</p>
+<ul>
+<li>La dirección empieza con <b>https://</b> y el navegador muestra el candado.</li>
+<li>Si alguien entra por <b>http://</b>, se lo redirige a la versión segura (opción “Enforce HTTPS” en la configuración de Pages).</li>
+<li>HTTPS protege los datos <b>en tránsito</b>. Por eso lo combinamos con las otras políticas.</li>
+</ul>
+</div>
+
+<div class="box">
+<h3>Comprobalo vos mismo</h3>
+<div class="bar"><span class="lock" id="lock">🔒</span><span><span class="proto" id="proto">https://</span><span id="addr">tu-usuario.github.io/TiendaNova/</span></span></div>
+<div class="status" id="status">Verificando la conexión…</div>
+<p class="note">Este recuadro lee la dirección real de la página que estás viendo. Si abrís el archivo desde tu computadora (file://) todavía no hay HTTPS: aparece al publicarlo en Git.</p>
+</div>
+</div>
+
+<details>
+<summary>Ficha de la política</summary>
+<dl class="ficha">
+<div><dt>Objetivo</dt><dd>Proteger la confidencialidad e integridad de la información que viaja entre el cliente y TiendaNova.</dd></div>
+<div><dt>Alcance</dt><dd>Todas las páginas y servicios del sitio, sin excepciones.</dd></div>
+<div><dt>Responsable</dt><dd>Responsable de infraestructura.</dd></div>
+<div><dt>Reglas</dt><dd>Solo se publica por HTTPS. No se aceptan contenidos mixtos (recursos por HTTP). Certificado vigente y versiones modernas de TLS.</dd></div>
+<div><dt>Controles</dt><dd>Redirección automática de HTTP a HTTPS. Revisión periódica del certificado y de la configuración TLS.</dd></div>
+<div><dt>Ante incumplimientos</dt><dd>Se corrige de inmediato la configuración, se registra el incidente y se informa al responsable.</dd></div>
+<div><dt>Revisión</dt><dd>Cada 6 meses o ante cambios en el servicio de alojamiento.</dd></div>
+</dl>
+</details>
+
+<!-- 2. PAGO PROTEGIDO -->
+<h2 id="pago">Pago protegido</h2>
+<p class="lead">Cuando pagás, tus datos de tarjeta van directamente a la pasarela de pagos. TiendaNova nunca los ve ni los guarda.</p>
+
+<div class="cols">
+<div class="box">
+<h3>Cómo funciona</h3>
+<ol>
+<li>Elegís tus productos y pasás a pagar.</li>
+<li>Cargás la tarjeta en el formulario de la pasarela, que procesa el pago.</li>
+<li>La pasarela le avisa a TiendaNova solo si el pago fue aprobado o rechazado.</li>
+<li>Recibís la confirmación por correo.</li>
+</ol>
+</div>
+<div class="box">
+<h3>Qué guardamos y qué no</h3>
+<ul>
+<li><b>No guardamos</b> el número completo de la tarjeta ni el código de seguridad.</li>
+<li><b>Sí guardamos</b> el estado del pago y, como máximo, los últimos 4 dígitos para que identifiques tu tarjeta.</li>
+<li>Trabajamos con pasarelas que cumplen el estándar PCI DSS, el de la industria de tarjetas.</li>
+</ul>
+</div>
+</div>
+
+<details>
+<summary>Ficha de la política</summary>
+<dl class="ficha">
+<div><dt>Objetivo</dt><dd>Evitar el fraude y la filtración de datos de tarjetas.</dd></div>
+<div><dt>Alcance</dt><dd>Todos los pagos realizados en la tienda y su registro interno.</dd></div>
+<div><dt>Responsable</dt><dd>Responsable de seguridad y área de administración.</dd></div>
+<div><dt>Reglas</dt><dd>Los datos de tarjeta solo se ingresan en la pasarela. Prohibido pedirlos por correo, chat o teléfono.</dd></div>
+<div><dt>Controles</dt><dd>Conciliación de pagos aprobados contra pedidos. Alertas ante operaciones inusuales.</dd></div>
+<div><dt>Ante incumplimientos</dt><dd>Se bloquea la operación, se avisa al cliente afectado y se notifica a la pasarela.</dd></div>
+<div><dt>Revisión</dt><dd>Cada 6 meses y cuando se cambie de pasarela.</dd></div>
+</dl>
+</details>
+
+<!-- 3. CUENTA SEGURA -->
+<h2 id="cuenta">Cuenta segura</h2>
+<p class="lead">Tu cuenta tiene varias capas de protección para que nadie más pueda entrar con tu nombre.</p>
+
+<div class="cols">
+<div class="box">
+<h3>Contraseñas cifradas</h3>
+<p>No guardamos tu contraseña tal como la escribís. Se transforma con un algoritmo de hash con sal (como bcrypt), de modo que ni el personal de TiendaNova puede leerla.</p>
+</div>
+<div class="box">
+<h3>Verificación en dos pasos</h3>
+<p>Además de la contraseña, podés pedir un código temporal. Aunque alguien conozca tu clave, no puede entrar sin ese segundo dato.</p>
+</div>
+<div class="box">
+<h3>Protección ante intentos</h3>
+<ul>
+<li>Bloqueo temporal tras varios intentos fallidos.</li>
+<li>Las sesiones se cierran solas tras un tiempo de inactividad.</li>
+<li>Te avisamos por correo si cambia tu contraseña.</li>
+</ul>
+</div>
+</div>
+
+<details>
+<summary>Ficha de la política</summary>
+<dl class="ficha">
+<div><dt>Objetivo</dt><dd>Garantizar que solo el titular acceda a su cuenta y a sus datos.</dd></div>
+<div><dt>Alcance</dt><dd>Clientes y personal con acceso al panel de administración.</dd></div>
+<div><dt>Responsable</dt><dd>Responsable de seguridad.</dd></div>
+<div><dt>Reglas</dt><dd>Contraseñas de 8 caracteres o más, cifradas. Verificación en dos pasos obligatoria para el personal y opcional para clientes. Prohibido compartir credenciales.</dd></div>
+<div><dt>Controles</dt><dd>Registro de inicios de sesión, bloqueo por intentos fallidos y revisión de accesos del personal.</dd></div>
+<div><dt>Ante incumplimientos</dt><dd>Se suspende la cuenta, se obliga a cambiar la clave y se investiga el acceso.</dd></div>
+<div><dt>Revisión</dt><dd>Cada 6 meses y después de cualquier incidente.</dd></div>
+</dl>
+</details>
+
+<!-- 4. SEGUIMIENTO -->
+<h2 id="seguimiento">Seguimiento del pedido</h2>
+<p class="lead">Podés ver en qué etapa está tu compra, y solo vos podés verla.</p>
+
+<ul class="track">
+<li>Confirmado</li>
+<li>Preparando</li>
+<li class="now">Enviado</li>
+<li>En camino</li>
+<li>Entregado</li>
+</ul>
+
+<div class="cols">
+<div class="box">
+<h3>Qué ves</h3>
+<ul>
+<li>El estado actualizado de cada pedido desde tu cuenta.</li>
+<li>Un correo con cada cambio importante.</li>
+<li>El código de seguimiento del envío.</li>
+</ul>
+</div>
+<div class="box">
+<h3>Cómo lo protegemos</h3>
+<ul>
+<li>Solo el titular, con su sesión iniciada, accede a sus pedidos.</li>
+<li>Cada cambio de estado queda registrado con fecha y hora.</li>
+<li>Los datos de entrega se usan únicamente para el envío.</li>
+</ul>
+</div>
+</div>
+
+<details>
+<summary>Ficha de la política</summary>
+<dl class="ficha">
+<div><dt>Objetivo</dt><dd>Dar transparencia al cliente y detectar a tiempo pedidos alterados o extraviados.</dd></div>
+<div><dt>Alcance</dt><dd>Todos los pedidos, desde la confirmación hasta la entrega.</dd></div>
+<div><dt>Responsable</dt><dd>Responsable de logística.</dd></div>
+<div><dt>Reglas</dt><dd>Cada pedido tiene un estado visible. Los cambios de estado solo los hace personal autorizado.</dd></div>
+<div><dt>Controles</dt><dd>Registro de eventos (logs) por pedido y revisión de pedidos demorados.</dd></div>
+<div><dt>Ante incumplimientos</dt><dd>Se investiga el pedido afectado, se contacta al cliente y se corrige el registro.</dd></div>
+<div><dt>Revisión</dt><dd>Cada 6 meses.</dd></div>
+</dl>
+</details>
+
+</main>
+
+<footer>TiendaNova · Sitio de ejemplo para trabajo práctico de Seguridad Informática · Política de privacidad conforme a la Ley 25.326</footer>
+
+<script>
+(function () {
+  var p = location.protocol;
+  var st = document.getElementById("status");
+  var proto = document.getElementById("proto");
+  var lock = document.getElementById("lock");
+  var addr = document.getElementById("addr");
+  if (p === "https:" || p === "http:") {
+    proto.textContent = p + "//";
+    addr.textContent = location.host + location.pathname;
+  }
+  if (p === "https:") {
+    st.textContent = "✔ Estás navegando por HTTPS: la conexión con esta página está cifrada.";
+    st.className = "status ok";
+  } else if (p === "http:") {
+    st.textContent = "⚠ Esta conexión no está cifrada (HTTP). Entrá por la dirección que empieza con https://.";
+    proto.style.color = "#d90429";
+    lock.textContent = "⚠";
+    lock.style.color = "#d90429";
+    document.getElementById("badge").textContent = "⚠ Sin cifrar";
+  } else {
+    st.textContent = "Estás viendo el archivo en tu computadora (file://). Al publicarlo en GitHub Pages se sirve por HTTPS.";
+    lock.textContent = "📄";
+    proto.textContent = "file://";
+    addr.textContent = "";
+  }
+})();
+</script>
+</body>
+</html>
