@@ -386,6 +386,7 @@ summary:focus-visible { outline: 3px solid var(--red); outline-offset: 2px; }
 .ficha dd { margin: 0; }
 
 /* Pie */
+footer a { color: #ff6b80; font-weight: 700; }
 footer {
     margin-top: 50px;
     background: var(--ink);

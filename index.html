@@ -14,6 +14,7 @@
 <a href="#pago">Pago</a>
 <a href="#cuenta">Cuenta</a>
 <a href="#seguimiento">Seguimiento</a>
+<a href="#privacidad">Privacidad</a>
 </nav>
 <span class="secure" id="badge">🔒 Sitio seguro</span>
 </div></header>
@@ -30,8 +31,8 @@
 <div class="trust">
 <a href="#conexion"><b>🔒 Conexión cifrada</b><span>Todo el sitio funciona con HTTPS.</span></a>
 <a href="#pago"><b>💳 Pago protegido</b><span>Los datos de tarjeta los procesa la pasarela, no los guardamos.</span></a>
-<a href="#cuenta"><b>🔑 Cuenta segura</b><span>Contraseñas cifradas y verificación en dos pasos.</span></a>
-<a href="#seguimiento"><b>📦 Seguimiento</b><span>Podés ver el estado de tu pedido en todo momento.</span></a>
+<a href="#cuenta"><b>🔑 Cuenta segura</b><span>Contraseñas guardadas con hash y sal, de 12 caracteres o más, y verificación en dos pasos.</span></a>
+<a href="#seguimiento"><b>📦 Seguimiento</b><span>Podés ver el estado de tu pedido en todo momento, y solo vos podés verlo.</span></a>
 </div>
 
 <!-- 1. CONEXIÓN CIFRADA -->
@@ -120,8 +121,9 @@
 
 <div class="cols">
 <div class="box">
-<h3>Contraseñas cifradas</h3>
-<p>No guardamos tu contraseña tal como la escribís. Se transforma con un algoritmo de hash con sal (como bcrypt), de modo que ni el personal de TiendaNova puede leerla.</p>
+<h3>Contraseñas con hash y sal</h3>
+<p>No guardamos tu contraseña, ni siquiera cifrada. Se transforma con una función de hash con sal (como bcrypt), un proceso de un solo sentido que no se puede revertir, así que ni el personal de TiendaNova puede leerla. El cifrado, en cambio, sí se puede deshacer con una clave: lo usamos para proteger los datos en tránsito (HTTPS), no para guardar contraseñas.</p>
+<p>Pedimos 12 caracteres o más.</p>
 </div>
 <div class="box">
 <h3>Verificación en dos pasos</h3>
@@ -130,7 +132,8 @@
 <div class="box">
 <h3>Protección ante intentos</h3>
 <ul>
-<li>Bloqueo temporal tras varios intentos fallidos.</li>
+<li>Bloqueo temporal de la cuenta tras 5 intentos fallidos seguidos.</li>
+<li>Límite de intentos por dirección IP y verificación anti-bots (CAPTCHA) cuando se detectan intentos masivos.</li>
 <li>Las sesiones se cierran solas tras un tiempo de inactividad.</li>
 <li>Te avisamos por correo si cambia tu contraseña.</li>
 </ul>
@@ -143,8 +146,8 @@
 <div><dt>Objetivo</dt><dd>Garantizar que solo el titular acceda a su cuenta y a sus datos.</dd></div>
 <div><dt>Alcance</dt><dd>Clientes y personal con acceso al panel de administración.</dd></div>
 <div><dt>Responsable</dt><dd>Responsable de seguridad.</dd></div>
-<div><dt>Reglas</dt><dd>Contraseñas de 8 caracteres o más, cifradas. Verificación en dos pasos obligatoria para el personal y opcional para clientes. Prohibido compartir credenciales.</dd></div>
-<div><dt>Controles</dt><dd>Registro de inicios de sesión, bloqueo por intentos fallidos y revisión de accesos del personal.</dd></div>
+<div><dt>Reglas</dt><dd>Contraseñas de 12 caracteres o más, guardadas con hash y sal (no cifradas ni en texto plano). Verificación en dos pasos obligatoria para el personal y el panel de administración, y opcional para clientes. Prohibido compartir credenciales.</dd></div>
+<div><dt>Controles</dt><dd>Registro de inicios de sesión, bloqueo temporal tras 5 intentos fallidos, límite de intentos por IP y por cuenta contra ataques automatizados (fuerza bruta y relleno de credenciales), CAPTCHA ante intentos masivos y revisión de accesos del personal.</dd></div>
 <div><dt>Ante incumplimientos</dt><dd>Se suspende la cuenta, se obliga a cambiar la clave y se investiga el acceso.</dd></div>
 <div><dt>Revisión</dt><dd>Cada 6 meses y después de cualquier incidente.</dd></div>
 </dl>
@@ -174,9 +177,9 @@
 <div class="box">
 <h3>Cómo lo protegemos</h3>
 <ul>
-<li>Solo el titular, con su sesión iniciada, accede a sus pedidos.</li>
+<li>Solo el titular, con su sesión iniciada, accede a sus pedidos: el servidor comprueba en cada consulta que el pedido pertenezca al usuario autenticado. Cambiar el número de pedido en la dirección no da acceso a pedidos ajenos.</li>
 <li>Cada cambio de estado queda registrado con fecha y hora.</li>
-<li>Los datos de entrega se usan únicamente para el envío.</li>
+<li>Los datos de entrega se usan únicamente para el envío y se conservan 12 meses después de la entrega.</li>
 </ul>
 </div>
 </div>
@@ -187,16 +190,54 @@
 <div><dt>Objetivo</dt><dd>Dar transparencia al cliente y detectar a tiempo pedidos alterados o extraviados.</dd></div>
 <div><dt>Alcance</dt><dd>Todos los pedidos, desde la confirmación hasta la entrega.</dd></div>
 <div><dt>Responsable</dt><dd>Responsable de logística.</dd></div>
-<div><dt>Reglas</dt><dd>Cada pedido tiene un estado visible. Los cambios de estado solo los hace personal autorizado.</dd></div>
-<div><dt>Controles</dt><dd>Registro de eventos (logs) por pedido y revisión de pedidos demorados.</dd></div>
+<div><dt>Reglas</dt><dd>Cada pedido tiene un estado visible solo para su titular. El servidor siempre verifica que el pedido corresponda al usuario autenticado, sin confiar en el identificador que llega en la solicitud. Los cambios de estado solo los hace personal autorizado.</dd></div>
+<div><dt>Controles</dt><dd>Registro de eventos (logs) por pedido, alerta ante consultas a pedidos que no son del usuario, pruebas periódicas de acceso con identificadores ajenos y revisión de pedidos demorados.</dd></div>
 <div><dt>Ante incumplimientos</dt><dd>Se investiga el pedido afectado, se contacta al cliente y se corrige el registro.</dd></div>
 <div><dt>Revisión</dt><dd>Cada 6 meses.</dd></div>
 </dl>
 </details>
 
+<!-- PRIVACIDAD -->
+<h2 id="privacidad">Tus datos y tus derechos</h2>
+<p class="lead">Tus datos personales están protegidos por la Ley 25.326. Podés saber qué guardamos de vos, corregirlo o pedir que lo eliminemos.</p>
+
+<div class="cols">
+<div class="box">
+<h3>Cómo ejercer tus derechos</h3>
+<ol>
+<li>Escribinos a <b>privacidad@tiendanova.example</b> desde el correo de tu cuenta e indicá qué querés: acceso, rectificación, actualización o supresión.</li>
+<li>Verificamos tu identidad para que nadie más pueda pedir tus datos.</li>
+<li>Si pedís acceso, te respondemos en 10 días corridos y es gratuito.</li>
+<li>Si pedís rectificar, actualizar o suprimir, lo hacemos en 5 días hábiles.</li>
+</ol>
+<p class="note">Si no respondemos en esos plazos, podés reclamar ante la Agencia de Acceso a la Información Pública (AAIP). La supresión no procede cuando existe una obligación legal de conservar el dato.</p>
+</div>
+<div class="box">
+<h3>Cuánto tiempo guardamos tus datos</h3>
+<ul>
+<li><b>Datos de facturación:</b> 10 años, por obligación legal.</li>
+<li><b>Datos de envío y contacto:</b> 12 meses después de entregado el pedido, para garantías, reclamos y devoluciones. Después se eliminan o se anonimizan.</li>
+<li><b>Cuenta de usuario:</b> hasta que pidas darla de baja.</li>
+</ul>
+</div>
+</div>
+
+<details>
+<summary>Ficha de la política</summary>
+<dl class="ficha">
+<div><dt>Objetivo</dt><dd>Respetar los derechos de los titulares de datos personales y conservar la información solo el tiempo necesario.</dd></div>
+<div><dt>Alcance</dt><dd>Datos personales, de facturación y de envío de clientes, desde su recolección hasta su eliminación.</dd></div>
+<div><dt>Responsable</dt><dd>Responsable de seguridad y área de administración.</dd></div>
+<div><dt>Reglas</dt><dd>Se atienden los pedidos de acceso en 10 días corridos y los de rectificación, actualización o supresión en 5 días hábiles. Los datos de envío se eliminan o anonimizan a los 12 meses de la entrega.</dd></div>
+<div><dt>Controles</dt><dd>Registro de cada solicitud con su fecha de recepción y de respuesta. Tarea periódica de borrado de datos vencidos.</dd></div>
+<div><dt>Ante incumplimientos</dt><dd>Se atiende el pedido de inmediato, se registra el incidente y se informa al responsable.</dd></div>
+<div><dt>Revisión</dt><dd>Cada 6 meses y ante cambios en la normativa.</dd></div>
+</dl>
+</details>
+
 </main>
 
-<footer>TiendaNova · Sitio de ejemplo para trabajo práctico de Seguridad Informática · Política de privacidad conforme a la Ley 25.326</footer>
+<footer>TiendaNova · Sitio de ejemplo para trabajo práctico de Seguridad Informática · <a href="#privacidad">Política de privacidad conforme a la Ley 25.326</a></footer>
 
 <script>
 (function () {
